@@ -1,5 +1,15 @@
 import re
 import pandas as pd
+import os
+
+def read_gold_prod_world():
+    dir = os.path.dirname(__file__)
+    df = pd.read_csv(os.path.join(dir, 'gold-production.csv'), skiprows=1)
+    df = df.loc[df['Entity'] == 'World']
+    df = df.rename(columns={ 'Gold Production (Clio-Infra & USGS)': 'gold_prod' })
+    df.columns = [x.lower() for x in df.columns]
+    df = df.set_index('year')
+    return df[['gold_prod']]
 
 def read_gold_nma():
     # https://nma.org/wp-content/uploads/2016/09/historic_gold_prices_1833_pres.pdf
