@@ -13,6 +13,9 @@ def read_dgs10():
 def read_dgs30():
     return _read_dgs('DGS30')
 
+def read_dgs3mo():
+    return _read_dgs('DGS3MO')
+
 def read_tbill3m_yield_census():
     # https://www2.census.gov/library/publications/2004/compendia/statab/123ed/hist/hs-39.pdf
     dir = os.path.dirname(__file__)

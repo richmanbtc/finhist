@@ -1,6 +1,10 @@
 from unittest import TestCase
 import numpy as np
-from src.finhist.bond import read_dgs10, read_dgs2, read_dgs30, read_gs10, read_tbill3m_yield_census
+from src.finhist.bond import (
+    read_dgs10, read_dgs2, read_dgs30,
+    read_gs10, read_tbill3m_yield_census,
+    read_dgs3mo
+)
 
 
 class TestBond(TestCase):
@@ -23,6 +27,11 @@ class TestBond(TestCase):
         df = read_dgs30()
         self.assertFalse(np.any(df.index.duplicated()))
         self.assertEqual(df.loc[(1977, 2), 'dgs30'], 7.754444444444443)
+
+    def test_read_dgs3mo(self):
+        df = read_dgs3mo()
+        self.assertFalse(np.any(df.index.duplicated()))
+        self.assertEqual(df.loc[(1981, 9), 'dgs3mo'], 15.607142857142858)
 
     def test_read_tbill3m_yield_census(self):
         df = read_tbill3m_yield_census()
