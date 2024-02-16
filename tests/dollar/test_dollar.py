@@ -1,6 +1,6 @@
 from unittest import TestCase
 import numpy as np
-from src.finhist.dollar import read_m2sl, read_bogmbase, read_m2_census
+from src.finhist.dollar import read_m2sl, read_bogmbase, read_m2_census, read_cpi_frb
 
 
 class TestDollar(TestCase):
@@ -18,4 +18,9 @@ class TestDollar(TestCase):
         df = read_m2_census()
         self.assertFalse(np.any(df.index.duplicated()))
         self.assertEqual(df.loc[1867, 'm2'], 1.28e9)
+
+    def test_read_cpi_frb(self):
+        df = read_cpi_frb()
+        self.assertFalse(np.any(df.index.duplicated()))
+        self.assertEqual(df.loc[1913, 'cpi'], 9.9)
 

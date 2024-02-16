@@ -34,3 +34,10 @@ def read_m2_census():
     df['m2'] *= 1e9
     df = df.set_index('year')
     return df
+
+def read_cpi_frb():
+    # https://www.minneapolisfed.org/about-us/monetary-policy/inflation-calculator/consumer-price-index-1913-
+    dir = os.path.dirname(__file__)
+    df = pd.read_csv(os.path.join(dir, 'cpi_frb.csv'))
+    df = df.set_index('year')
+    return df
