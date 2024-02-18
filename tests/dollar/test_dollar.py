@@ -2,7 +2,7 @@ from unittest import TestCase
 import numpy as np
 from src.finhist.dollar import (
     read_m2sl, read_bogmbase, read_m2_census, read_cpi_frb,
-    read_cpi_frb_1800, read_total_salary
+    read_cpi_frb_1800, read_total_salary, read_total_salary2
 )
 
 
@@ -36,3 +36,8 @@ class TestDollar(TestCase):
         df = read_total_salary()
         self.assertFalse(np.any(df.index.duplicated()))
         self.assertEqual(df.loc[1982, 'total_salary'], 1479.187e9)
+
+    def test_read_total_salary2(self):
+        df = read_total_salary2()
+        self.assertFalse(np.any(df.index.duplicated()))
+        self.assertEqual(df.loc[(1959, 1), 'total_salary'], 252.3e9)

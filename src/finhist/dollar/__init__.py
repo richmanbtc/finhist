@@ -69,3 +69,17 @@ def read_total_salary():
     df = df.drop(columns='date')
     df = df.set_index(['year'])
     return df
+
+def read_total_salary2():
+    # https://fred.stlouisfed.org/series/A576RC1
+    dir = os.path.dirname(__file__)
+    df = pd.read_csv(os.path.join(dir, 'A576RC1.csv'))
+    df = df.rename(columns={ 'A576RC1': 'total_salary' })
+    df.columns = [x.lower() for x in df.columns]
+    df['date'] = pd.to_datetime(df['date'])
+    df['year'] = df['date'].dt.year
+    df['month'] = df['date'].dt.month
+    df['total_salary'] *= 1e9
+    df = df.drop(columns='date')
+    df = df.set_index(['year', 'month'])
+    return df
