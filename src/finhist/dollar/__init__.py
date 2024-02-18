@@ -56,3 +56,16 @@ def read_cpi_frb_1800():
     df = pd.read_csv(os.path.join(dir, 'cpi_frb_1800.csv'))
     df = df.set_index('year')
     return df
+
+def read_total_salary():
+    # https://fred.stlouisfed.org/series/BA06RC1A027NBEA
+    dir = os.path.dirname(__file__)
+    df = pd.read_csv(os.path.join(dir, 'BA06RC1A027NBEA.csv'))
+    df = df.rename(columns={ 'BA06RC1A027NBEA': 'total_salary' })
+    df.columns = [x.lower() for x in df.columns]
+    df['date'] = pd.to_datetime(df['date'])
+    df['year'] = df['date'].dt.year
+    df['total_salary'] *= 1e9
+    df = df.drop(columns='date')
+    df = df.set_index(['year'])
+    return df
