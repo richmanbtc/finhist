@@ -35,9 +35,24 @@ def read_m2_census():
     df = df.set_index('year')
     return df
 
+def read_m0_census():
+    # page 992-993 https://www2.census.gov/library/publications/1975/compendia/hist_stats_colonial-1970/hist_stats_colonial-1970p2-chX.pdf
+    dir = os.path.dirname(__file__)
+    df = pd.read_csv(os.path.join(dir, 'm2_census.csv'))
+    df['m0'] *= 1e9
+    df = df.set_index('year')
+    return df
+
 def read_cpi_frb():
     # https://www.minneapolisfed.org/about-us/monetary-policy/inflation-calculator/consumer-price-index-1913-
     dir = os.path.dirname(__file__)
     df = pd.read_csv(os.path.join(dir, 'cpi_frb.csv'))
+    df = df.set_index('year')
+    return df
+
+def read_cpi_frb_1800():
+    # https://www.minneapolisfed.org/about-us/monetary-policy/inflation-calculator/consumer-price-index-1800-
+    dir = os.path.dirname(__file__)
+    df = pd.read_csv(os.path.join(dir, 'cpi_frb_1800.csv'))
     df = df.set_index('year')
     return df

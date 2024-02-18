@@ -10,3 +10,17 @@ candidate
 - https://www.sfu.ca/~djacks/data/boombust/index.html
 - https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html
 - chf
+
+## dev
+
+test
+
+```bash
+pdm run python -m unittest
+```
+
+install
+
+```bash
+pip install "git+https://github.com/richmanbtc/finhist.git"
+```
