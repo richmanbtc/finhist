@@ -24,6 +24,7 @@ def read_jpy_m2():
     df = df.set_index(['year', 'month']).sort_index()
     df = df.dropna()
     df = df.loc[~df.index.duplicated(keep='last')]
+    df['jpy_m2'] *= 1e8
     return df
 
 

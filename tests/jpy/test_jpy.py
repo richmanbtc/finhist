@@ -9,7 +9,7 @@ class TestJpy(TestCase):
     def test_read_jpy_m2(self):
         df = read_jpy_m2()
         check_data(self, df)
-        self.assertEqual(df.loc[(1967, 1), 'jpy_m2'], 282500)
+        self.assertEqual(df.loc[(1967, 1), 'jpy_m2'], 282500e8)
 
     def test_read_jpy_yield(self):
         df = read_jpy_yield()
