@@ -40,3 +40,18 @@ def read_jpy_yield():
     df = df.set_index(['year', 'month']).sort_index()
     df = df.dropna()
     return df
+
+def read_jpy_cpi():
+    # https://www.stat-search.boj.or.jp/ssi/cgi-bin/famecgi2?cgi=$nme_a000&lstSelection=PR01
+    # 2020年基準
+    dir = os.path.dirname(__file__)
+    df = pd.read_csv(os.path.join(dir, 'nme_R031.2504.20240219202601.02.csv'), skiprows=1)
+
+    df = df.rename(columns={ '[国内企業物価指数] 総平均': 'jpy_cpi' })
+    df['year'] = df['系列名称'].str[:4].astype('int')
+    df['month'] = df['系列名称'].str[5:].astype('int')
+
+    df = df[['year', 'month', 'jpy_cpi']]
+    df = df.set_index(['year', 'month']).sort_index()
+    df = df.dropna()
+    return df
