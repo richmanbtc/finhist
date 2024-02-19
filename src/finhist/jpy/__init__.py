@@ -74,7 +74,7 @@ def read_usdjpy():
         rows.append({ 'year': i // 12, 'month': i % 12 + 1, 'usdjpy': 270 })
     for i in range(12 * 1949 + 4 - 1, 12 * 1971 + 12 - 1):
         rows.append({ 'year': i // 12, 'month': i % 12 + 1, 'usdjpy': 360 })
-    for i in range(12 * 1971 + 12 - 1, 12 * 1972 + 1 - 1):
+    for i in range(12 * 1971 + 12 - 1, 12 * 1973 + 1 - 1):
         rows.append({ 'year': i // 12, 'month': i % 12 + 1, 'usdjpy': 308 })
     df = pd.concat([
         pd.DataFrame(rows),
