@@ -55,3 +55,33 @@ def read_jpy_cpi():
     df = df.set_index(['year', 'month']).sort_index()
     df = df.dropna()
     return df
+
+def read_usdjpy():
+    # https://www.stat-search.boj.or.jp/ssi/cgi-bin/famecgi2?cgi=$nme_a000&lstSelection=FM08
+    dir = os.path.dirname(__file__)
+    df = pd.read_csv(os.path.join(dir, 'nme_R031.19695.20240219222133.02.csv'), skiprows=1)
+
+    df = df.rename(columns={ '東京市場　ドル・円　スポット　17時時点/月中平均': 'usdjpy' })
+    df['year'] = df['系列名称'].str[:4].astype('int')
+    df['month'] = df['系列名称'].str[5:].astype('int')
+
+    rows = []
+    for i in range(12 * 1945 + 8 - 1, 12 * 1947 + 3 - 1):
+        rows.append({ 'year': i // 12, 'month': i % 12 + 1, 'usdjpy': 15 })
+    for i in range(12 * 1947 + 3 - 1, 12 * 1948 + 7 - 1):
+        rows.append({ 'year': i // 12, 'month': i % 12 + 1, 'usdjpy': 50 })
+    for i in range(12 * 1948 + 7 - 1, 12 * 1949 + 4 - 1):
+        rows.append({ 'year': i // 12, 'month': i % 12 + 1, 'usdjpy': 270 })
+    for i in range(12 * 1949 + 4 - 1, 12 * 1971 + 12 - 1):
+        rows.append({ 'year': i // 12, 'month': i % 12 + 1, 'usdjpy': 360 })
+    for i in range(12 * 1971 + 12 - 1, 12 * 1972 + 1 - 1):
+        rows.append({ 'year': i // 12, 'month': i % 12 + 1, 'usdjpy': 308 })
+    df = pd.concat([
+        pd.DataFrame(rows),
+        df,
+    ])
+
+    df = df[['year', 'month', 'usdjpy']]
+    df = df.set_index(['year', 'month']).sort_index()
+    df = df.dropna()
+    return df

@@ -1,7 +1,7 @@
 from unittest import TestCase
 import numpy as np
 from src.finhist.jpy import (
-    read_jpy_m2, read_jpy_yield, read_jpy_cpi
+    read_jpy_m2, read_jpy_yield, read_jpy_cpi, read_usdjpy
 )
 
 
@@ -20,3 +20,8 @@ class TestJpy(TestCase):
         df = read_jpy_cpi()
         self.assertFalse(np.any(df.index.duplicated()))
         self.assertEqual(df.loc[(1960, 1), 'jpy_cpi'], 48.2)
+
+    def test_read_usdjpy(self):
+        df = read_usdjpy()
+        self.assertFalse(np.any(df.index.duplicated()))
+        self.assertEqual(df.loc[(1945, 8), 'usdjpy'], 15)
